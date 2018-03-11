@@ -1,1 +1,2 @@
 # BattleOfTank
+New game
