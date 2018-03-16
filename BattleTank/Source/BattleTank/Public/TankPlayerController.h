@@ -22,4 +22,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
     UPROPERTY(EditAnywhere) float CrossHairXLocation = 0.5;
     UPROPERTY(EditAnywhere) float CrossHairYLocation = 0.3333;
 
+    bool GetLoocDirection(FVector2D ScreenLocation,FVector& lookDirection) const;
+    bool GetLookVectorHitLocation(FVector lookDirection ,FVector& OutHitLocation) const;
+    UPROPERTY(EditAnywhere) float LineTraceRange = 1000000;
+
 };
