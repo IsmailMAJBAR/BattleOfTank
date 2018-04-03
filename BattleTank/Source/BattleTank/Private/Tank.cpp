@@ -45,8 +45,8 @@ void ATank::SetTurrentReference(UTankTurrent* TurrentToSet){
 
 void ATank::Fire(){
     
-    auto Time = GetWorld()->GetTimeSeconds();
-     UE_LOG(LogTemp,Warning,TEXT("%f tank fire"),Time);
+//    auto Time = GetWorld()->GetTimeSeconds();
+//     UE_LOG(LogTemp,Warning,TEXT("%f tank fire"),Time);
     bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds ;
   
     if(Barrel && isReloaded){
