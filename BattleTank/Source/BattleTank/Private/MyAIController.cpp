@@ -6,35 +6,41 @@
 
 void AMyAIController::BeginPlay(){
     Super::BeginPlay();
-    auto ControlledTank = GetControlledTank();
-    if(!ControlledTank){
-        UE_LOG(LogTemp,Warning,TEXT("AIControler isn't controling any tank"));
-    }else{
-        UE_LOG(LogTemp,Warning,TEXT("AIControler is controling the tank : %s "),*(ControlledTank->GetName()));
-    }
-    auto PlayerTank = GetPlayerTank();
-    if(!PlayerTank){
-        UE_LOG(LogTemp,Warning,TEXT("AIControler didn't find player tank"));
-    }else{
-        UE_LOG(LogTemp,Warning,TEXT("AIControler did find player tank : %s "),*(PlayerTank->GetName()));
-    }
+//    auto ControlledTank = GetControlledTank();
+//    if(!ControlledTank){
+//        UE_LOG(LogTemp,Warning,TEXT("AIControler isn't controling any tank"));
+//    }else{
+//        UE_LOG(LogTemp,Warning,TEXT("AIControler is controling the tank : %s "),*(ControlledTank->GetName()));
+//    }
+//    auto PlayerTank = GetPlayerTank();
+//    if(!PlayerTank){
+//        UE_LOG(LogTemp,Warning,TEXT("AIControler didn't find player tank"));
+//    }else{
+//        UE_LOG(LogTemp,Warning,TEXT("AIControler did find player tank : %s "),*(PlayerTank->GetName()));
+//    }
 }
 
-ATank* AMyAIController::GetControlledTank() const {
-    return Cast<ATank>(GetPawn());
-}
-ATank* AMyAIController::GetPlayerTank() const{
-    auto PlayerPawn  = GetWorld()->GetFirstPlayerController()->GetPawn();
-    if(!PlayerPawn){return nullptr;}
-    return Cast<ATank>(PlayerPawn) ;
-    
-}
+//ATank* AMyAIController::GetControlledTank() const {
+//    return Cast<ATank>(GetPawn());
+//}
+//
+//ATank* AMyAIController::GetPlayerTank() const{
+//    auto PlayerPawn  = GetWorld()->GetFirstPlayerController()->GetPawn();
+//    if(!PlayerPawn){return nullptr;}
+//    return Cast<ATank>(PlayerPawn) ;
+//
+//}
 void AMyAIController::Tick( float DeltaTime ){
     Super::Tick( DeltaTime );
-    if(GetPlayerTank()){
+ 
+    auto PlayerTank  = Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
+    auto ControlledTank = Cast<ATank> (GetPawn());
+    if(PlayerTank){
         // MOVE TOWARD THE PLAYER
+        
         //AIM AT THE PLAYER
-        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+        ControlledTank->AimAt(PlayerTank->GetActorLocation());
+        ControlledTank->Fire();
     }
 }
 
