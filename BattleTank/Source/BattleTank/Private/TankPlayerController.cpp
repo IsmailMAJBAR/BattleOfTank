@@ -8,13 +8,12 @@
 
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
-    auto ControlledTank = GetControlledTank();
-    if(!ControlledTank){
-        UE_LOG(LogTemp,Warning,TEXT("PlayerControler isn't controling any tank"));
-    }else{
-        UE_LOG(LogTemp,Warning,TEXT("PlayerControler is controling the tank : %s "),*(ControlledTank->GetName()));
-    }
-    
+//    auto ControlledTank = GetControlledTank();
+//    if(!ControlledTank){
+//        UE_LOG(LogTemp,Warning,TEXT("PlayerControler isn't controling any tank"));
+//    }else{
+//        UE_LOG(LogTemp,Warning,TEXT("PlayerControler is controling the tank : %s "),*(ControlledTank->GetName()));
+//    }
 }
 // Called every frame
 void ATankPlayerController::Tick( float DeltaTime ){

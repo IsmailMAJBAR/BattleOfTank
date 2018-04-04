@@ -5,6 +5,7 @@
 #include "TankBarrel.h"
 #include "TankTurrent.h"
 #include "Projectile.h"
+#include "TankNavMovementComponent.h"
 #include "Tank.h"
 
 // Sets default values
@@ -13,6 +14,8 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
     TankAimingConponent = CreateDefaultSubobject<UTankAimingConponent>(FName("AimingConponant"));
+    TankNavMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("MovementConponant"));
+
 }
 
 // Called when the game starts or when spawned
