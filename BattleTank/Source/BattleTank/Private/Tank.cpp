@@ -14,7 +14,7 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
     TankAimingConponent = CreateDefaultSubobject<UTankAimingConponent>(FName("AimingConponant"));
-    TankNavMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("MovementConponant"));
+ //   TankNavMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("MovementConponant"));
 
 }
 
