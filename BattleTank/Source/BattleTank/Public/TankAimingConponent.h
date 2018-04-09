@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingConponent.generated.h"
 
+
 //forward declaration
 class UTankBarrel;
 class UTankTurrent;

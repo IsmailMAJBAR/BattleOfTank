@@ -37,7 +37,7 @@ void AMyAIController::Tick( float DeltaTime ){
     auto ControlledTank = Cast<ATank> (GetPawn());
     if(PlayerTank){
         // MOVE TOWARD THE PLAYER
-        
+        MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
         //AIM AT THE PLAYER
         ControlledTank->AimAt(PlayerTank->GetActorLocation());
         ControlledTank->Fire();

@@ -5,6 +5,7 @@
 #include "GameFramework/NavMovementComponent.h"
 #include "TankNavMovementComponent.generated.h"
 
+
 class UTankTrack ;
 /**
  * 
@@ -19,8 +20,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = Input ) void MoveRightLeft(float throow);
     UFUNCTION(BlueprintCallable, Category = Input ) void intendMovementForward(float throow);
     UFUNCTION(BlueprintCallable, Category = Setup ) void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
-
-
+    virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+    
+    
 private:
     UTankTrack* LeftTrack = nullptr;
     UTankTrack* RightTrack = nullptr;
