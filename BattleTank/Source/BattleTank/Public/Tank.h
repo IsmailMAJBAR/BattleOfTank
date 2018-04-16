@@ -5,6 +5,7 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+
 //forward declaration
 class UTankBarrel;
 class UTankTurrent;
@@ -18,10 +19,10 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-    UFUNCTION(BlueprintCallable,Category = Setup ) void SetBarrelReference(UTankBarrel* BarrelToSet);
-    UFUNCTION(BlueprintCallable,Category = Setup ) void SetTurrentReference(UTankTurrent* TurrentToSet);
+   // UFUNCTION(BlueprintCallable,Category = Setup ) void SetBarrelReference(UTankBarrel* BarrelToSet);
+   // UFUNCTION(BlueprintCallable,Category = Setup ) void SetTurrentReference(UTankTurrent* TurrentToSet);
     void AimAt(FVector HitLocation);
-    UFUNCTION(BlueprintCallable , Category =  Firing) void Fire();
+    UFUNCTION(BlueprintCallable , Category =  "Firing") void Fire();
 
     
 protected:
@@ -36,15 +37,17 @@ private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
     
-    // Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-   
-    UPROPERTY(EditDefaultsOnly, Category = Firing) float LunchSpeed = 6000.0 ;
-    UPROPERTY(EditDefaultsOnly, Category = Setup) TSubclassOf<AProjectile> ProjectileBluePrint ;
+//    // Called to bind functionality to input
+//    virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+//   
+    UPROPERTY(EditDefaultsOnly, Category = "Firing") float LunchSpeed = 6000.0 ;
+    UPROPERTY(EditDefaultsOnly, Category = "Setup") TSubclassOf<AProjectile> ProjectileBluePrint ;
     
     UTankBarrel* Barrel = nullptr;
     
-    UPROPERTY(EditDefaultsOnly, Category = Firing) float ReloadTimeInSeconds = 3.0;
+    UPROPERTY(EditDefaultsOnly, Category = "Firing") float ReloadTimeInSeconds = 3.0;
     double LastFireTime = 0.0;
+    
+    
 
 };

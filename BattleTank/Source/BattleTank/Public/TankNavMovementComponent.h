@@ -17,9 +17,9 @@ class BATTLETANK_API UTankNavMovementComponent : public UNavMovementComponent
 	
 public:
     
-    UFUNCTION(BlueprintCallable, Category = Input ) void MoveRightLeft(float throow);
-    UFUNCTION(BlueprintCallable, Category = Input ) void intendMovementForward(float throow);
-    UFUNCTION(BlueprintCallable, Category = Setup ) void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
+    UFUNCTION(BlueprintCallable, Category = "Input" ) void MoveRightLeft(float throow);
+    UFUNCTION(BlueprintCallable, Category = "Input" ) void intendMovementForward(float throow);
+    UFUNCTION(BlueprintCallable, Category = "Setup" ) void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
     virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
     
     
