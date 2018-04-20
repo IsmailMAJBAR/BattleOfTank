@@ -4,10 +4,7 @@
 #include "AIController.h"
 #include "MyAIController.generated.h"
 
-class ATank;
-/**
- * 
- */
+
 UCLASS()
 class BATTLETANK_API AMyAIController : public AAIController
 {
@@ -18,7 +15,6 @@ class BATTLETANK_API AMyAIController : public AAIController
     virtual void BeginPlay() override;
    // ATank* GetPlayerTank() const; // dose not change any thing
     virtual void Tick( float DeltaTime ) override;
-    
     // How close can the AI tank get
     float AcceptanceRadius = 3000;
 

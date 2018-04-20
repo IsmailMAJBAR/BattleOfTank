@@ -1,46 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "Tank.h"
+//#include "Tank.h"
+#include "TankAimingConponent.h"
 #include "MyAIController.h"
 
 void AMyAIController::BeginPlay(){
     Super::BeginPlay();
-//    auto ControlledTank = GetControlledTank();
-//    if(!ControlledTank){
-//        UE_LOG(LogTemp,Warning,TEXT("AIControler isn't controling any tank"));
-//    }else{
-//        UE_LOG(LogTemp,Warning,TEXT("AIControler is controling the tank : %s "),*(ControlledTank->GetName()));
-//    }
-//    auto PlayerTank = GetPlayerTank();
-//    if(!PlayerTank){
-//        UE_LOG(LogTemp,Warning,TEXT("AIControler didn't find player tank"));
-//    }else{
-//        UE_LOG(LogTemp,Warning,TEXT("AIControler did find player tank : %s "),*(PlayerTank->GetName()));
-//    }
 }
-
-//ATank* AMyAIController::GetControlledTank() const {
-//    return Cast<ATank>(GetPawn());
-//}
-//
-//ATank* AMyAIController::GetPlayerTank() const{
-//    auto PlayerPawn  = GetWorld()->GetFirstPlayerController()->GetPawn();
-//    if(!PlayerPawn){return nullptr;}
-//    return Cast<ATank>(PlayerPawn) ;
-//
-//}
 void AMyAIController::Tick( float DeltaTime ){
     Super::Tick( DeltaTime );
  
-    auto PlayerTank  = Cast<ATank> (GetWorld()->GetFirstPlayerController()->GetPawn());
-    auto ControlledTank = Cast<ATank> (GetPawn());
-    if(PlayerTank){
+    auto PlayerTank  = GetWorld()->GetFirstPlayerController()->GetPawn();
+    auto ControlledTank = GetPawn();
+    if(!PlayerTank && !ControlledTank){ return;}
+    auto AimingConponent = ControlledTank->FindComponentByClass<UTankAimingConponent>();
         // MOVE TOWARD THE PLAYER
         MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
         //AIM AT THE PLAYER
-        ControlledTank->AimAt(PlayerTank->GetActorLocation());
-        ControlledTank->Fire();
-    }
-}
-
+        AimingConponent->AimAt(PlayerTank->GetActorLocation());
+        //TODO Fix firing
+    AimingConponent->Fire();
+};

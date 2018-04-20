@@ -3,9 +3,6 @@
 #include "BattleTank.h"
 #include "TankTrack.h"
 
-
-
-
 void UTankTrack::SetThortle(float thortle){
    
     auto ForceApplied = GetForwardVector() * thortle * TrackMaxDrivingForce;

@@ -26,7 +26,4 @@ public:
 private:
     UTankTrack* LeftTrack = nullptr;
     UTankTrack* RightTrack = nullptr;
-   // UTankTrack ForwardTrack = nullptr;
-   // UTankTrack BackTrack = nullptr;
-
 };

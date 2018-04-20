@@ -1,21 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "Tank.h"
 #include "TankAimingConponent.h"
 #include "TankPlayerController.h"
 
-
-
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
-//    auto ControlledTank = GetControlledTank();
-//    if(!ControlledTank){
-//        UE_LOG(LogTemp,Warning,TEXT("PlayerControler isn't controling any tank"));
-//    }else{
-//        UE_LOG(LogTemp,Warning,TEXT("PlayerControler is controling the tank : %s "),*(ControlledTank->GetName()));
-//    }
-    auto AimingConponent = GetControlledTank()->FindComponentByClass<UTankAimingConponent>();
+
+   auto AimingConponent = GetPawn()->FindComponentByClass<UTankAimingConponent>();
     if (AimingConponent){
         FoundAimingComponent(AimingConponent);
     }
@@ -27,31 +19,24 @@ void ATankPlayerController::Tick( float DeltaTime ){
     AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const {
-    return Cast<ATank>(GetPawn());
-}
-
-
 void ATankPlayerController::AimTowardsCrosshair(){
-    if(!GetControlledTank()){return;}
+    auto AimingConponent = GetPawn()->FindComponentByClass<UTankAimingConponent>();
+    if (AimingConponent){
+        FoundAimingComponent(AimingConponent);
+    }
     FVector HitLocation ; //out parameter
     if(GetSightRayHitLocation(HitLocation)){
-        // UE_LOG(LogTemp,Warning,TEXT("HitLocation %s"),*HitLocation.ToString());
-        GetControlledTank()->AimAt(HitLocation);
+       AimingConponent->AimAt(HitLocation);
     }
 }
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const {
-   // OutHitLocation = FVector(1.0); test
     int32 ViewPortSizeX;
     int32 ViewPortSizeY; //size of viewport
     GetViewportSize(ViewPortSizeX,ViewPortSizeY);
     auto ScreenLocation = FVector2D(ViewPortSizeX* CrossHairXLocation,ViewPortSizeY* CrossHairYLocation);
-   // UE_LOG(LogTemp,Warning,TEXT("ScreenLocation %s"),*ScreenLocation.ToString());
     FVector lookDirection ;
     if(GetLoocDirection(ScreenLocation, lookDirection)){
-       // UE_LOG(LogTemp,Warning,TEXT("WorldDirection %s"),*lookDirection.ToString());
         GetLookVectorHitLocation(lookDirection ,OutHitLocation);
-
     }
     return true ;
 }
