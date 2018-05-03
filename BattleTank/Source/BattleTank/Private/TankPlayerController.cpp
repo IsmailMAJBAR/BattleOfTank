@@ -26,7 +26,8 @@ void ATankPlayerController::AimTowardsCrosshair(){
         FoundAimingComponent(AimingConponent);
     }
     FVector HitLocation ; //out parameter
-    if(GetSightRayHitLocation(HitLocation)){
+    bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+    if (bGotHitLocation){ // Has "side-effect", is going to line trace
        AimingConponent->AimAt(HitLocation);
     }
 }
@@ -37,9 +38,9 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
     auto ScreenLocation = FVector2D(ViewPortSizeX* CrossHairXLocation,ViewPortSizeY* CrossHairYLocation);
     FVector lookDirection ;
     if(GetLoocDirection(ScreenLocation, lookDirection)){
-        GetLookVectorHitLocation(lookDirection ,OutHitLocation);
+        return GetLookVectorHitLocation(lookDirection ,OutHitLocation);
     }
-    return true ;
+    return false ;
 }
 bool ATankPlayerController::GetLoocDirection(FVector2D ScreenLocation,FVector& lookDirection) const{
     FVector CameraWorldLocation ;
